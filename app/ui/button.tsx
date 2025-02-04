@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { deleteInvoice } from '@/app/lib/actions';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  id: string;
 }
-
-export function Button({ children, className, ...rest }: ButtonProps) {
+export function Button({ children, className, id, ...rest }: ButtonProps) {
+  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
   return (
     <button
       {...rest}

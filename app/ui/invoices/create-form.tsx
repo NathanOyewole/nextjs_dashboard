@@ -1,3 +1,10 @@
+'use client';
+ 
+// ...
+import { use, useActionState } from 'react';
+import { createInvoice } from '@/app/lib/actions';
+// Removed duplicate Form function
+
 import { CustomerField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
@@ -7,10 +14,17 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
+interface State {
+  message: string | null;
+  errors: Record<string, any>;
+}
+// import { createInvoice } from '@/app/lib/actions';
+
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
+  const initialState: State = { message: null, errors: {} };
   return (
-    <form>
+    <form action={createInvoice}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -105,7 +119,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         >
           Cancel
         </Link>
-        <Button type="submit">Create Invoice</Button>
+        <Button type="submit" id={''}>Create Invoice</Button>
       </div>
     </form>
   );
